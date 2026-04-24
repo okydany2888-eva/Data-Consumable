@@ -319,8 +319,6 @@
 <div class="app-container">
     <div class="header">
         <h1>📦 Smart Stock</h1>
-        <span class="global-total" id="globalTotal">Total: 0</span>
-    </div>
 
     <!-- Form Input -->
     <div class="form-card no-print">
