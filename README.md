@@ -213,7 +213,7 @@
         }
 
         /* footer & responsive android */
-        @media (max-width: 640px) {
+        @media (max-width: 480px) {
             body {
                 padding: 10px;
             }
