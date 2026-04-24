@@ -311,11 +311,11 @@
             </div>
             <div class="form-field">
                 <label>🔢 Quantity</label>
-                <input type="number" id="qtyInput" placeholder="0" value="1" min="1" step="1">
+                <input type="number" id="qtyInput" placeholder="0" value="0" min="0" step="0">
             </div>
             <div class="form-field">
                 <label>📏 Unit / Satuan</label>
-                <input type="text" id="unitInput" placeholder="pcs, box, kg" value="pcs" maxlength="20">
+                <input type="text" id="unitInput" placeholder="pcs, box, kg" maxlength="20">
             </div>
             <div class="form-field">
                 <label>✏️ Keterangan</label>
