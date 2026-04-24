@@ -138,6 +138,7 @@
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
         }
         button:active {
@@ -150,10 +151,6 @@
         }
         .btn-danger {
             background: #dc2626;
-        }
-        .btn-warning {
-            background: #eab308;
-            color: #1e293b;
         }
         .add-new-link {
             margin-top: 8px;
@@ -216,28 +213,45 @@
             font-size: 0.7rem;
         }
 
-        /* Tabel Riwayat */
-        .table-wrapper {
-            overflow-x: auto;
+        /* Tabel Riwayat per Bulan */
+        .month-section {
+            margin-bottom: 28px;
+            border: 1px solid #e2e8f0;
             border-radius: 20px;
-            border: 1px solid #eef2f6;
-            background: white;
-            margin: 12px 0;
+            overflow: hidden;
         }
-        table {
+        .month-header {
+            background: #1e293b;
+            color: white;
+            padding: 12px 16px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .month-header:hover {
+            background: #0f172a;
+        }
+        .month-table-wrapper {
+            overflow-x: auto;
+            background: white;
+        }
+        .month-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.8rem;
-            min-width: 700px;
         }
-        th {
+        .month-table th {
             background: #eef2f9;
-            padding: 12px 8px;
+            padding: 10px 8px;
             font-weight: 700;
             text-align: center;
+            border-bottom: 1px solid #dce3ec;
         }
-        td {
-            padding: 10px 6px;
+        .month-table td {
+            padding: 8px 6px;
             text-align: center;
             border-bottom: 1px solid #f0f4f9;
         }
@@ -252,7 +266,7 @@
         .action-btn {
             background: none;
             border: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             padding: 4px 8px;
             margin: 0 2px;
@@ -271,11 +285,6 @@
         .delete-btn:hover {
             background: #fee2e2;
         }
-        .empty-row td {
-            text-align: center;
-            padding: 40px;
-            color: #94a3b8;
-        }
         .badge {
             padding: 3px 10px;
             border-radius: 30px;
@@ -289,6 +298,12 @@
         .badge-keluar {
             background: #ef444420;
             color: #b91c1c;
+        }
+        .empty-data {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+            font-style: italic;
         }
 
         .action-bar {
@@ -398,32 +413,32 @@
         <div class="form-card">
             <div class="form-row">
                 <div class="form-group">
-                    <label>📅 Tanggal Masuk</label>
+                    <label>Tanggal Masuk</label>
                     <input type="date" id="tanggalMasuk">
                 </div>
                 <div class="form-group">
-                    <label>📦 Nama Barang</label>
+                    <label>Nama Barang</label>
                     <select id="namaBarangMasuk">
                         <option value="">-- Pilih Barang --</option>
                     </select>
                     <div class="add-new-link" onclick="showAddBarangModal('masuk')">+ Tambah Barang Baru</div>
                 </div>
                 <div class="form-group">
-                    <label>📏 Satuan</label>
+                    <label>Satuan</label>
                     <select id="satuanMasuk">
                         <option value="">-- Pilih Satuan --</option>
                     </select>
                     <div class="add-new-link" onclick="showAddSatuanModal('masuk')">+ Tambah Satuan Baru</div>
                 </div>
                 <div class="form-group">
-                    <label>🔢 Jumlah Masuk</label>
-                    <input type="number" id="jumlahMasuk" value="1" min="1">
+                    <label>Jumlah Masuk</label>
+                    <input type="number" id="jumlahMasuk" value="-" min="0">
                 </div>
                 <div class="form-group">
-                    <label>👤 PIC</label>
+                    <label>PIC</label>
                     <input type="text" id="picMasuk" placeholder="Nama">
                 </div>
-                <button id="btnTambahMasuk">+ Tambah Masuk</button>
+                <button id="btnTambahMasuk">Tambah Masuk</button>
             </div>
         </div>
     </div>
@@ -433,74 +448,66 @@
         <div class="form-card">
             <div class="form-row">
                 <div class="form-group">
-                    <label>📅 Tanggal Keluar</label>
+                    <label>Tanggal Keluar</label>
                     <input type="date" id="tanggalKeluar">
                 </div>
                 <div class="form-group">
-                    <label>📦 Nama Barang</label>
+                    <label>Nama Barang</label>
                     <select id="namaBarangKeluar">
                         <option value="">-- Pilih Barang --</option>
                     </select>
                     <div class="add-new-link" onclick="showAddBarangModal('keluar')">+ Tambah Barang Baru</div>
                 </div>
                 <div class="form-group">
-                    <label>📏 Satuan</label>
+                    <label>Satuan</label>
                     <select id="satuanKeluar">
                         <option value="">-- Pilih Satuan --</option>
                     </select>
                     <div class="add-new-link" onclick="showAddSatuanModal('keluar')">+ Tambah Satuan Baru</div>
                 </div>
                 <div class="form-group">
-                    <label>🔢 Jumlah Keluar</label>
-                    <input type="number" id="jumlahKeluar" value="1" min="1">
+                    <label>Jumlah Keluar</label>
+                    <input type="number" id="jumlahKeluar" value="-" min="0">
                 </div>
                 <div class="form-group">
-                    <label>👤 PIC</label>
+                    <label>PIC</label>
                     <input type="text" id="picKeluar" placeholder="Nama">
                 </div>
-                <button id="btnTambahKeluar" style="background:#dc2626;">- Tambah Keluar</button>
+                <button id="btnTambahKeluar" style="background:#dc2626;">Tambah Keluar</button>
             </div>
         </div>
     </div>
 
     <!-- RINGKASAN STOK AKHIR -->
     <div class="stock-summary no-print">
-        <h3>📊 STOCK AKHIR PER NAMA BARANG <span style="font-size:0.75rem;">(Total Masuk - Total Keluar)</span></h3>
+        <h3>STOCK AKHIR PER NAMA BARANG (Total Masuk - Total Keluar)</h3>
         <div class="summary-table-wrapper">
             <table class="summary-table" id="summaryStockTable">
                 <thead>
                     <tr><th>Nama Barang</th><th>Total Masuk</th><th>Total Keluar</th><th>Stok Tersedia</th><th>Satuan</th></tr>
                 </thead>
                 <tbody id="summaryStockBody">
-                    <tr><td colspan="5" style="text-align:center;">Belum ada data transaksi</td></tr>
+                    </tr><td colspan="5" style="text-align:center;">Belum ada data transaksi</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- Riwayat Transaksi -->
+    <!-- Riwayat Transaksi per Bulan -->
     <div class="action-bar no-print">
         <div class="search-section">
-            <input type="text" id="searchRiwayat" placeholder="🔍 Cari nama barang...">
+            <input type="text" id="searchRiwayat" placeholder="Cari nama barang...">
         </div>
         <div class="btn-group">
-            <button id="printBtn" class="btn-outline">🖨️ Print</button>
-            <button id="exportExcelBtn" class="btn-outline">📊 Export Excel</button>
-            <button id="resetAllBtn" class="btn-danger">🗑️ Reset Semua</button>
+            <button id="printBtn" class="btn-outline">Print</button>
+            <button id="exportExcelBtn" class="btn-outline">Export Excel</button>
+            <button id="resetAllBtn" class="btn-danger">Reset Semua</button>
         </div>
     </div>
 
-    <div class="table-wrapper">
-        <table id="riwayatTable">
-            <thead>
-                <tr><th>Tanggal</th><th>Tipe</th><th>Nama Barang</th><th>Jumlah</th><th>Satuan</th><th>PIC</th><th class="no-print">Aksi</th></tr>
-            </thead>
-            <tbody id="riwayatBody">
-                <tr class="empty-row"><td colspan="7">📭 Belum ada transaksi</td></tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="footer-note no-print">✅ Stok akhir = Total Masuk - Total Keluar | ✏️ Klik Edit untuk merevisi data | Data tersimpan otomatis</div>
+    <div id="riwayatContainer" class="riwayat-container"></div>
+    
+    <div class="footer-note no-print">Stok akhir = Total Masuk - Total Keluar | Klik Edit untuk merevisi data | Data tersimpan otomatis</div>
 </div>
 
 <!-- Modal Tambah Barang/Satuan -->
@@ -540,7 +547,7 @@
     const btnTambahKeluar = document.getElementById('btnTambahKeluar');
 
     const searchRiwayat = document.getElementById('searchRiwayat');
-    const riwayatBody = document.getElementById('riwayatBody');
+    const riwayatContainer = document.getElementById('riwayatContainer');
     const summaryStockBody = document.getElementById('summaryStockBody');
     const globalStockValue = document.getElementById('globalStockValue');
     const printBtn = document.getElementById('printBtn');
@@ -556,6 +563,26 @@
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabMasuk = document.getElementById('tabMasuk');
     const tabKeluar = document.getElementById('tabKeluar');
+
+    // Helper: Format tanggal ke DD/MM/YYYY
+    function formatTanggal(dateString) {
+        if (!dateString) return '-';
+        const parts = dateString.split('-');
+        if (parts.length === 3) {
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+        return dateString;
+    }
+
+    // Helper: Parse dari DD/MM/YYYY ke YYYY-MM-DD untuk penyimpanan
+    function parseTanggalToISO(tanggalDMY) {
+        if (!tanggalDMY) return '';
+        const parts = tanggalDMY.split('/');
+        if (parts.length === 3) {
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+        return tanggalDMY;
+    }
 
     function setDefaultDates() {
         const today = new Date().toISOString().slice(0,10);
@@ -674,42 +701,79 @@
                         <td>${item.totalKeluar}</td>
                         <td><span class="stock-tersedia">${item.stokAkhir}</span></td>
                         <td><span class="badge-unit-sm">${escapeHtml(item.satuan)}</span></td>
-                     </tr>`;
+                      </tr>`;
         }
         summaryStockBody.innerHTML = html;
         if(globalStockValue) globalStockValue.innerText = `Total Stok: ${getGlobalTotalStock()}`;
     }
 
-    // Render Riwayat dengan Edit & Delete
-    function renderRiwayat() {
+    // Render Riwayat per Bulan
+    function renderRiwayatPerBulan() {
         const keyword = searchRiwayat.value.trim().toLowerCase();
         let filtered = transactions;
         if (keyword !== "") {
             filtered = transactions.filter(t => t.barang.toLowerCase().includes(keyword));
         }
+        
         if (filtered.length === 0) {
-            riwayatBody.innerHTML = '<tr class="empty-row"><td colspan="7">🔍 Tidak ada transaksi</td></tr>';
+            riwayatContainer.innerHTML = '<div class="empty-data">Tidak ada transaksi</div>';
             return;
         }
-        let html = '';
-        for (const trx of filtered) {
-            const rowClass = trx.tipe === 'masuk' ? 'row-masuk' : 'row-keluar';
-            const tipeBadge = trx.tipe === 'masuk' ? '<span class="badge badge-masuk">MASUK</span>' : '<span class="badge badge-keluar">KELUAR</span>';
-            html += `<tr class="${rowClass}">
-                        <td>${escapeHtml(trx.tanggal)}</td>
-                        <td>${tipeBadge}</td>
-                        <td><strong>${escapeHtml(trx.barang)}</strong></td>
-                        <td>${trx.jumlah}</td>
-                        <td>${escapeHtml(trx.satuan)}</td>
-                        <td>${escapeHtml(trx.pic)}</td>
-                        <td class="no-print">
-                            <button class="action-btn edit-btn" data-id="${trx.id}" title="Edit">✏️</button>
-                            <button class="action-btn delete-btn" data-id="${trx.id}" title="Hapus">🗑️</button>
-                        </td>
-                     </tr>`;
-        }
-        riwayatBody.innerHTML = html;
+
+        // Kelompokkan berdasarkan bulan-tahun
+        const grouped = {};
+        filtered.forEach(trx => {
+            const date = new Date(trx.tanggal);
+            const monthYear = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+            const monthName = date.toLocaleDateString('id-ID', { year: 'numeric', month: 'long' });
+            if (!grouped[monthYear]) {
+                grouped[monthYear] = { name: monthName, data: [] };
+            }
+            grouped[monthYear].data.push(trx);
+        });
+
+        // Urutkan bulan dari terbaru ke terlama
+        const sortedMonths = Object.keys(grouped).sort((a,b) => b.localeCompare(a));
         
+        let html = '';
+        for (const monthKey of sortedMonths) {
+            const month = grouped[monthKey];
+            html += `
+                <div class="month-section">
+                    <div class="month-header" onclick="toggleMonth(this)">
+                        <span>📅 ${month.name}</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="month-table-wrapper">
+                        <table class="month-table">
+                            <thead>
+                                <table><th>Tanggal</th><th>Tipe</th><th>Nama Barang</th><th>Jumlah</th><th>Satuan</th><th>PIC</th><th class="no-print">Aksi</th></tr>
+                            </thead>
+                            <tbody>
+            `;
+            // Urutkan data per bulan berdasarkan tanggal
+            month.data.sort((a,b) => a.tanggal.localeCompare(b.tanggal));
+            for (const trx of month.data) {
+                const rowClass = trx.tipe === 'masuk' ? 'row-masuk' : 'row-keluar';
+                const tipeBadge = trx.tipe === 'masuk' ? '<span class="badge badge-masuk">MASUK</span>' : '<span class="badge badge-keluar">KELUAR</span>';
+                html += `<tr class="${rowClass}">
+                            <td>${formatTanggal(trx.tanggal)}</td>
+                            <td>${tipeBadge}</td>
+                            <td><strong>${escapeHtml(trx.barang)}</strong></td>
+                            <td>${trx.jumlah}</td>
+                            <td>${escapeHtml(trx.satuan)}</td>
+                            <td>${escapeHtml(trx.pic)}</td>
+                            <td class="no-print">
+                                <button class="action-btn edit-btn" data-id="${trx.id}" title="Edit">✏️</button>
+                                <button class="action-btn delete-btn" data-id="${trx.id}" title="Hapus">🗑️</button>
+                            </td>
+                          </tr>`;
+            }
+            html += `</tbody></table></div></div>`;
+        }
+        riwayatContainer.innerHTML = html;
+        
+        // Attach event listeners
         document.querySelectorAll('.edit-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const id = parseInt(btn.getAttribute('data-id'));
@@ -724,42 +788,53 @@
         });
     }
 
+    // Toggle bulan (collapse/expand)
+    window.toggleMonth = function(header) {
+        const wrapper = header.nextElementSibling;
+        if (wrapper.style.display === 'none') {
+            wrapper.style.display = 'block';
+            header.querySelector('span:last-child').innerHTML = '▼';
+        } else {
+            wrapper.style.display = 'none';
+            header.querySelector('span:last-child').innerHTML = '▶';
+        }
+    };
+
     // EDIT MODAL
     function openEditModal(id) {
         const trx = transactions.find(t => t.id === id);
         if (!trx) return;
         currentEditId = id;
         
-        // Buat modal edit
         const modalDiv = document.createElement('div');
         modalDiv.className = 'edit-modal';
         modalDiv.innerHTML = `
             <div class="edit-modal-content">
-                <h3>✏️ Edit Transaksi</h3>
+                <h3>Edit Transaksi</h3>
                 <div class="edit-form-group">
-                    <label>📅 Tanggal</label>
+                    <label>Tanggal</label>
                     <input type="date" id="editTanggal" value="${trx.tanggal}">
                 </div>
                 <div class="edit-form-group">
-                    <label>📦 Nama Barang</label>
+                    <label>Nama Barang</label>
                     <select id="editBarang">
                         <option value="">-- Pilih Barang --</option>
                         ${masterBarang.map(b => `<option value="${escapeHtml(b)}" ${b === trx.barang ? 'selected' : ''}>${escapeHtml(b)}</option>`).join('')}
                     </select>
                 </div>
                 <div class="edit-form-group">
-                    <label>📏 Satuan</label>
+                    <label>Satuan</label>
                     <select id="editSatuan">
                         <option value="">-- Pilih Satuan --</option>
                         ${masterSatuan.map(s => `<option value="${escapeHtml(s)}" ${s === trx.satuan ? 'selected' : ''}>${escapeHtml(s)}</option>`).join('')}
                     </select>
                 </div>
                 <div class="edit-form-group">
-                    <label>🔢 Jumlah</label>
+                    <label>Jumlah</label>
                     <input type="number" id="editJumlah" value="${trx.jumlah}" min="1">
                 </div>
                 <div class="edit-form-group">
-                    <label>👤 PIC</label>
+                    <label>PIC</label>
                     <input type="text" id="editPic" value="${escapeHtml(trx.pic)}" placeholder="Nama PIC">
                 </div>
                 <div class="edit-modal-buttons">
@@ -770,9 +845,7 @@
         `;
         document.body.appendChild(modalDiv);
         
-        document.getElementById('editCancelBtn').addEventListener('click', () => {
-            modalDiv.remove();
-        });
+        document.getElementById('editCancelBtn').addEventListener('click', () => modalDiv.remove());
         document.getElementById('editSaveBtn').addEventListener('click', () => {
             const newTanggal = document.getElementById('editTanggal').value;
             const newBarang = document.getElementById('editBarang').value;
@@ -786,10 +859,8 @@
             if (isNaN(newJumlah) || newJumlah <= 0) { showToast("Jumlah harus > 0", "info"); return; }
             if (!newPic) { showToast("Nama PIC harus diisi", "info"); return; }
             
-            // Jika barang atau satuan berubah, validasi stok untuk transaksi keluar
             const oldTrx = transactions.find(t => t.id === id);
             if (oldTrx.tipe === 'keluar') {
-                // Hitung stok tersedia SELAIN transaksi ini
                 let stokSebelum = 0;
                 for (const tr of transactions) {
                     if (tr.id === id) continue;
@@ -799,32 +870,22 @@
                     }
                 }
                 if (stokSebelum < newJumlah) {
-                    showToast(`⚠️ Stok ${newBarang} (${newSatuan}) tidak mencukupi! Tersedia: ${stokSebelum}`, "info");
+                    showToast(`Stok ${newBarang} (${newSatuan}) tidak mencukupi! Tersedia: ${stokSebelum}`, "info");
                     return;
                 }
             }
             
-            // Update data
             const index = transactions.findIndex(t => t.id === id);
             if (index !== -1) {
-                transactions[index] = {
-                    ...transactions[index],
-                    tanggal: newTanggal,
-                    barang: newBarang,
-                    satuan: newSatuan,
-                    jumlah: newJumlah,
-                    pic: newPic
-                };
+                transactions[index] = { ...transactions[index], tanggal: newTanggal, barang: newBarang, satuan: newSatuan, jumlah: newJumlah, pic: newPic };
                 saveToLocal();
-                renderRiwayat();
+                renderRiwayatPerBulan();
                 renderStockSummary();
                 showToast("Data berhasil diperbarui", "success");
             }
             modalDiv.remove();
         });
-        modalDiv.addEventListener('click', (e) => {
-            if (e.target === modalDiv) modalDiv.remove();
-        });
+        modalDiv.addEventListener('click', (e) => { if (e.target === modalDiv) modalDiv.remove(); });
     }
 
     function deleteTransaction(id) {
@@ -836,13 +897,12 @@
                 if (nextId <= maxId) nextId = maxId+1;
             }
             saveToLocal();
-            renderRiwayat();
+            renderRiwayatPerBulan();
             renderStockSummary();
             showToast("Transaksi dihapus", "success");
         }
     }
 
-    // Tambah Masuk
     function addMasuk() {
         const tanggal = tanggalMasuk.value.trim();
         const barang = namaBarangMasuk.value;
@@ -860,12 +920,11 @@
         transactions.push(newTrx);
         resetFormMasuk();
         saveToLocal();
-        renderRiwayat();
+        renderRiwayatPerBulan();
         renderStockSummary();
-        showToast("✅ Barang Masuk ditambahkan", "success");
+        showToast("Barang Masuk ditambahkan", "success");
     }
 
-    // Tambah Keluar
     function addKeluar() {
         const tanggal = tanggalKeluar.value.trim();
         const barang = namaBarangKeluar.value;
@@ -887,7 +946,7 @@
             }
         }
         if (stokTersedia < jumlah) {
-            showToast(`⚠️ Stok ${barang} (${satuan}) tidak mencukupi! Tersedia: ${stokTersedia}`, "info");
+            showToast(`Stok ${barang} (${satuan}) tidak mencukupi! Tersedia: ${stokTersedia}`, "info");
             return;
         }
 
@@ -895,7 +954,7 @@
         transactions.push(newTrx);
         resetFormKeluar();
         saveToLocal();
-        renderRiwayat();
+        renderRiwayatPerBulan();
         renderStockSummary();
         showToast("Barang Keluar dicatat", "success");
     }
@@ -937,7 +996,7 @@
     function exportToExcel() {
         const summary = getStockSummary();
         let excelHtml = `<html><head><meta charset="UTF-8"><title>Laporan Stok</title></head><body>
-            <h2>📊 Laporan Stok Akhir Per Barang</h2>
+            <h2>Laporan Stok Akhir Per Barang</h2>
             <p>Tanggal Export: ${new Date().toLocaleString('id-ID')}</p>
             <table border="1" cellpadding="5">
                 <thead><tr><th>Nama Barang</th><th>Total Masuk</th><th>Total Keluar</th><th>Stok Tersedia</th><th>Satuan</th></tr></thead><tbody>`;
@@ -946,9 +1005,9 @@
         });
         excelHtml += `</tbody></table><h3>Detail Riwayat</h3><table border="1" cellpadding="5"><thead><tr><th>Tanggal</th><th>Tipe</th><th>Barang</th><th>Jumlah</th><th>Satuan</th><th>PIC</th></tr></thead><tbody>`;
         transactions.forEach(t => {
-            excelHtml += `<tr><td>${t.tanggal}</td><td>${t.tipe.toUpperCase()}</td><td>${t.barang}</td><td>${t.jumlah}</td><td>${t.satuan}</td><td>${t.pic}</td></tr>`;
+            excelHtml += `</table><td>${formatTanggal(t.tanggal)}</td><td>${t.tipe.toUpperCase()}</td><td>${t.barang}</td><td>${t.jumlah}</td><td>${t.satuan}</td><td>${t.pic}</tr>`;
         });
-        excelHtml += `</tbody><tr></body></html>`;
+        excelHtml += `</tbody></table></body></html>`;
         const blob = new Blob([excelHtml], { type: 'application/vnd.ms-excel' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
@@ -962,7 +1021,7 @@
         const summary = getStockSummary();
         let summaryRows = '', trxRows = '';
         summary.forEach(s => { summaryRows += `<tr><td>${s.namaBarang}</td><td>${s.totalMasuk}</td><td>${s.totalKeluar}</td><td><strong>${s.stokAkhir}</strong></td><td>${s.satuan}</td></tr>`; });
-        transactions.forEach(t => { trxRows += `<tr><td>${t.tanggal}</td><td>${t.tipe.toUpperCase()}</td><td>${t.barang}</td><td>${t.jumlah}</td><td>${t.satuan}</td><td>${t.pic}</td></tr>`; });
+        transactions.forEach(t => { trxRows += `<tr><td>${formatTanggal(t.tanggal)}</td><td>${t.tipe.toUpperCase()}</td><td>${t.barang}</td><td>${t.jumlah}</td><td>${t.satuan}</td><td>${t.pic}</td></tr>`; });
         const printWindow = window.open('', '_blank');
         printWindow.document.write(`
             <html><head><title>Cetak Laporan Stok</title><style>body{font-family:sans-serif;}table{border-collapse:collapse;width:100%;}th,td{border:1px solid #888;padding:8px;}th{background:#f0f0f0;}</style></head>
@@ -976,11 +1035,11 @@
     }
 
     function resetAllData() {
-        if (confirm("⚠️ PERINGATAN: Semua data transaksi akan dihapus permanen! Lanjutkan?")) {
+        if (confirm("PERINGATAN: Semua data transaksi akan dihapus permanen! Lanjutkan?")) {
             transactions = [];
             nextId = 1;
             saveToLocal();
-            renderRiwayat();
+            renderRiwayatPerBulan();
             renderStockSummary();
             showToast("Semua data transaksi direset.", "success");
         }
@@ -1001,7 +1060,7 @@
                 } else initSampleData();
             } catch(e) { initSampleData(); }
         } else initSampleData();
-        renderRiwayat();
+        renderRiwayatPerBulan();
         renderStockSummary();
     }
 
@@ -1009,8 +1068,9 @@
         transactions = [];
         const today = new Date().toISOString().slice(0,10);
         const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
-        transactions.push({ id:1, tanggal:yesterday, tipe:'masuk', barang:'Kabel USB', jumlah:50, satuan:'pcs', pic:'Ahmad' });
-        transactions.push({ id:2, tanggal:today, tipe:'masuk', barang:'Plastik OPP', jumlah:200, satuan:'lembar', pic:'Siti' });
+        const lastMonth = new Date(Date.now()-30*86400000).toISOString().slice(0,10);
+        transactions.push({ id:1, tanggal:lastMonth, tipe:'masuk', barang:'Kabel USB', jumlah:50, satuan:'pcs', pic:'Ahmad' });
+        transactions.push({ id:2, tanggal:yesterday, tipe:'masuk', barang:'Plastik OPP', jumlah:200, satuan:'lembar', pic:'Siti' });
         transactions.push({ id:3, tanggal:today, tipe:'keluar', barang:'Kabel USB', jumlah:10, satuan:'pcs', pic:'Budi' });
         transactions.push({ id:4, tanggal:today, tipe:'masuk', barang:'Magnet', jumlah:30, satuan:'buah', pic:'Ani' });
         transactions.push({ id:5, tanggal:today, tipe:'keluar', barang:'Plastik OPP', jumlah:50, satuan:'lembar', pic:'Cahyo' });
@@ -1032,7 +1092,7 @@
     function bindEvents() {
         btnTambahMasuk.addEventListener('click', addMasuk);
         btnTambahKeluar.addEventListener('click', addKeluar);
-        searchRiwayat.addEventListener('input', renderRiwayat);
+        searchRiwayat.addEventListener('input', () => renderRiwayatPerBulan());
         printBtn.addEventListener('click', printReport);
         exportExcelBtn.addEventListener('click', exportToExcel);
         resetAllBtn.addEventListener('click', resetAllData);
