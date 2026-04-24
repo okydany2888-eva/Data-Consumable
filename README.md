@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Smart Stock</title>
+    <title>Smart Stock - Manajemen Stok Gudang</title>
     <style>
         * {
             box-sizing: border-box;
@@ -313,12 +313,11 @@
 <div class="app-container">
     <div class="header">
         <h1>📦 Smart Stock</h1>
-    </div>
 
     <!-- Tab Menu -->
     <div class="tab-menu no-print">
-        <button class="tab-btn active" data-tab="masuk">Barang Masuk</button>
-        <button class="tab-btn" data-tab="keluar">Barang Keluar</button>
+        <button class="tab-btn active" data-tab="masuk">📥 Barang Masuk</button>
+        <button class="tab-btn" data-tab="keluar">📤 Barang Keluar</button>
     </div>
 
     <!-- Panel Barang Masuk (Hijau) -->
@@ -477,8 +476,7 @@
 
     const searchRiwayat = document.getElementById('searchRiwayat');
     const riwayatBody = document.getElementById('riwayatBody');
-    const summaryStockBody = document.getElementById('summaryStockBody');
-    const globalStockValue = document.getElementById('globalStockValue');
+    const summaryStockBody = document.getElementById('summaryStockBody')
     const printBtn = document.getElementById('printBtn');
     const exportExcelBtn = document.getElementById('exportExcelBtn');
     const resetAllBtn = document.getElementById('resetAllBtn');
@@ -602,25 +600,19 @@
         const summary = getStockSummary();
         if (summary.length === 0) {
             summaryStockBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Belum ada data transaksi</td></tr>';
-            globalStockValue.innerText = `Total Stok: 0`;
+            if(globalStockValue) globalStockValue.innerText = `Total Stok: 0`;
             return;
         }
         let html = '';
         for (const item of summary) {
-            let stokClass = item.stokAkhir <= 0 ? 'stock-tersedia' : 'stock-tersedia';
-            if (item.stokAkhir < 0) stokClass = 'stock-tersedia';
             html += `<tr>
                         <td style="font-weight:700;">${escapeHtml(item.namaBarang)}</td>
                         <td>${item.totalMasuk}</td>
                         <td>${item.totalKeluar}</td>
                         <td><span class="stock-tersedia">${item.stokAkhir}</span></td>
                         <td><span class="badge-unit-sm">${escapeHtml(item.satuan)}</span></td>
-                     </tr>`;
+                      </tr>`;
         }
-        summaryStockBody.innerHTML = html;
-        globalStockValue.innerText = `Total Stok: ${getGlobalTotalStock()}`;
-    }
-
     // Render Riwayat dengan filter
     function renderRiwayat() {
         const keyword = searchRiwayat.value.trim().toLowerCase();
@@ -644,7 +636,7 @@
                         <td>${escapeHtml(trx.satuan)}</td>
                         <td>${escapeHtml(trx.pic)}</td>
                         <td class="no-print"><button class="delete-btn" data-id="${trx.id}" title="Hapus">🗑️</button></td>
-                     </tr>`;
+                      </tr>`;
         }
         riwayatBody.innerHTML = html;
         document.querySelectorAll('.delete-btn').forEach(btn => {
@@ -736,6 +728,7 @@
         satuanMasuk.value = '';
         jumlahMasuk.value = '1';
         picMasuk.value = '';
+        namaBarangMasuk.focus();
     }
     function resetFormKeluar() {
         const today = new Date().toISOString().slice(0,10);
@@ -744,6 +737,7 @@
         satuanKeluar.value = '';
         jumlahKeluar.value = '1';
         picKeluar.value = '';
+        namaBarangKeluar.focus();
     }
 
     function showToast(msg, type) {
@@ -797,7 +791,7 @@
         printWindow.document.write(`
             <html><head><title>Cetak Laporan Stok</title><style>body{font-family:sans-serif;}table{border-collapse:collapse;width:100%;}th,td{border:1px solid #888;padding:8px;}th{background:#f0f0f0;}</style></head>
             <body><h2>Laporan Stok Akhir Per Barang</h2><p>Tanggal Cetak: ${new Date().toLocaleString()}</p>
-            <table><thead><tr><小时Nama Barang</th><th>Total Masuk</th><th>Total Keluar</th><th>Stok Tersedia</th><th>Satuan</th></tr></thead><tbody>${summaryRows}</tbody></table>
+            <table><thead><tr><th>Nama Barang</th><th>Total Masuk</th><th>Total Keluar</th><th>Stok Tersedia</th><th>Satuan</th></tr></thead><tbody>${summaryRows}</tbody></table>
             <h3>Detail Riwayat</h3><table><thead><tr><th>Tanggal</th><th>Tipe</th><th>Barang</th><th>Jumlah</th><th>Satuan</th><th>PIC</th></tr></thead><tbody>${trxRows}</tbody></table>
             </body></html>
         `);
@@ -806,7 +800,7 @@
     }
 
     function resetAllData() {
-        if (confirm("⚠️ PERINGATAN: Semua data transaksi akan dihapus! Lanjutkan?")) {
+        if (confirm("⚠️ PERINGATAN: Semua data transaksi akan dihapus permanen! Lanjutkan?")) {
             transactions = [];
             nextId = 1;
             saveToLocal();
