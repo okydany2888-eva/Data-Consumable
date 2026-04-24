@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -47,7 +48,15 @@
             align-items: center;
             gap: 8px;
         }
-      
+        .global-total {
+            background: #e9f4e8;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2b6e3c;
+        }
+
         .form-card {
             background: #f8fafc;
             border-radius: 24px;
@@ -319,7 +328,7 @@
 <div class="app-container">
     <div class="header">
         <h1>📦 Smart Stock</h1>
-
+      
     <!-- Form Input -->
     <div class="form-card no-print">
         <div class="form-group">
@@ -337,7 +346,7 @@
         <div class="double-row">
             <div class="form-group">
                 <label>🔢 Quantity</label>
-                <input type="number" id="qtyInput" value="0" min="1" step="0">
+                <input type="number" id="qtyInput" placeholder="0" value="0" min="0" step="0">
             </div>
             <div class="form-group">
                 <label>📏 Satuan</label>
@@ -348,7 +357,7 @@
             <label>✏️ Keterangan</label>
             <input type="text" id="keteranganInput" placeholder="Opsional" maxlength="80">
         </div>
-        <button id="btnTambah">➕ Tambah Data</button>
+        <button id="btnTambah">Tambah Data</button>
     </div>
 
     <!-- Ringkasan Total Per Nama Barang (Nilai Akumulasi) -->
@@ -614,7 +623,7 @@
         renderTable();
         renderSummary();   // Update ringkasan total per barang
         saveToLocal();
-        showToast();"✅ berhasil ditambahkan!", "success");
+        showToast("✅ berhasil ditambahkan!", "success");
     }
 
     // Reset form input
