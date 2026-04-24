@@ -346,7 +346,7 @@
         <div class="double-row">
             <div class="form-group">
                 <label>🔢 Quantity</label>
-                <input type="number" id="qtyInput" placeholder="0" value="0" min="0" step="0">
+                <input type="number" id="qtyInput" value="0" min="0" step="-">
             </div>
             <div class="form-group">
                 <label>📏 Satuan</label>
