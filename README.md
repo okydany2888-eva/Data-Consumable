@@ -493,7 +493,7 @@
     // Master Data
     function loadMasterData() {
         const savedBarang = localStorage.getItem("smartStockMasterBarang");
-        masterBarang = savedBarang ? JSON.parse(savedBarang) : ["Kabel USB", "Plastik OPP", "Magnet", "Box Kardus", "Tape Lakban"];
+        masterBarang = savedBarang ? JSON.parse(savedBarang) : ["Karet", "Plastik sampah", "Magnet", "BOPP", "Double Tape", "Lakban"];
         const savedSatuan = localStorage.getItem("smartStockMasterSatuan");
         masterSatuan = savedSatuan ? JSON.parse(savedSatuan) : ["pcs", "lembar", "buah", "box", "roll", "kg", "meter"];
     }
@@ -554,7 +554,7 @@
     }
     function renderStockSummary() {
         const summary = getStockSummary();
-        if (summary.length === 0) { summaryStockBody.innerHTML = '<tr><td colspan="5">Belum ada数据</td></tr>'; globalStockValue.innerText = 'Total Stok: 0'; return; }
+        if (summary.length === 0) { summaryStockBody.innerHTML = '<tr><td colspan="5">Belum ada data</td></tr>'; globalStockValue.innerText = 'Total Stok: 0'; return; }
         let html = '';
         summary.forEach(item => {
             html += `<tr><td style="font-weight:700;">${escapeHtml(item.namaBarang)}</td><td>${item.totalMasuk}</td><td>${item.totalKeluar}</td><td><span class="stock-tersedia">${item.stokAkhir}</span></td><td>${escapeHtml(item.satuan)}</td></tr>`;
@@ -780,11 +780,11 @@
         const today = new Date().toISOString().slice(0,10);
         const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
         const lastMonth = new Date(Date.now()-30*86400000).toISOString().slice(0,10);
-        transactions.push({ id:1, tanggal:lastMonth, tipe:'masuk', barang:'Kabel USB', jumlah:50, satuan:'pcs', pic:'Ahmad' });
-        transactions.push({ id:2, tanggal:yesterday, tipe:'masuk', barang:'Plastik OPP', jumlah:200, satuan:'lembar', pic:'Siti' });
-        transactions.push({ id:3, tanggal:today, tipe:'keluar', barang:'Kabel USB', jumlah:10, satuan:'pcs', pic:'Budi' });
+        transactions.push({ id:1, tanggal:lastMonth, tipe:'masuk', barang:'Karet', jumlah:50, satuan:'pcs', pic:'Ahmad' });
+        transactions.push({ id:2, tanggal:yesterday, tipe:'masuk', barang:'Plastik sampah', jumlah:200, satuan:'lembar', pic:'Siti' });
+        transactions.push({ id:3, tanggal:today, tipe:'keluar', barang:'BOPP', jumlah:10, satuan:'pcs', pic:'Budi' });
         transactions.push({ id:4, tanggal:today, tipe:'masuk', barang:'Magnet', jumlah:30, satuan:'buah', pic:'Ani' });
-        transactions.push({ id:5, tanggal:today, tipe:'keluar', barang:'Plastik OPP', jumlah:50, satuan:'lembar', pic:'Cahyo' });
+        transactions.push({ id:5, tanggal:today, tipe:'keluar', barang:'Double tape', jumlah:50, satuan:'lembar', pic:'Cahyo' });
         nextId = 6; saveToLocal();
     }
 
